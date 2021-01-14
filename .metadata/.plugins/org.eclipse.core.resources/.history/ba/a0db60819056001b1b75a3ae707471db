@@ -1,0 +1,42 @@
+package TravelfactoryTest.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import TravelfactoryTest.dto.CampaignDto;
+import TravelfactoryTest.service.CampaignService;
+
+@RestController
+@RequestMapping("/marketing/ws/partner/campaign")
+public class CampaignController {
+
+	@Autowired
+	CampaignService service;
+
+	@PostMapping("/{id}")
+	public boolean createCampaign(@PathVariable String id,@RequestBody CampaignDto campaignDto) {
+		return service.createCampaign(id, campaignDto);
+	}
+	
+	@GetMapping("/{id}")
+	public CampaignDto getCampaign(@PathVariable String id) {
+		return service.getCampaign(id);
+	}
+	
+	@PutMapping("/{id}")
+	public CampaignDto updateCampaign(@PathVariable String id,@RequestBody CampaignDto campaignDto) {
+		return service.updateCampaign(id, campaignDto);
+	}
+	
+	@DeleteMapping("/{id}")
+	public boolean removeCampaign(@PathVariable String id) {
+		return service.removeCampaign(id);
+	}
+}

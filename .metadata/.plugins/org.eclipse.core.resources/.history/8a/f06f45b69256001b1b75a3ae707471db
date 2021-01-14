@@ -1,0 +1,5 @@
+package TravelfactoryTest.dao;
+
+public class CampanignRepository {
+
+}

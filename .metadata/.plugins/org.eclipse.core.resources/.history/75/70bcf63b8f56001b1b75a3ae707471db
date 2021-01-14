@@ -1,0 +1,13 @@
+package TravelfactoryTest.service;
+
+import org.springframework.stereotype.Service;
+
+import TravelfactoryTest.dto.CampaignDto;
+
+@Service
+public interface campaignService {
+	boolean createCampaign(String id, CampaignDto campaignDto);
+	CampaignDto getCampaign(String id);
+	CampaignDto updateCampaign(String id, CampaignDto campaignDto);
+	boolean removeCampaign(String id);
+}

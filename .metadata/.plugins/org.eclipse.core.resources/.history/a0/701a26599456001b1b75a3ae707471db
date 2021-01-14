@@ -1,0 +1,11 @@
+package TravelfactoryTest.service;
+
+import org.springframework.stereotype.Service;
+
+import TravelfactoryTest.dto.ContactDto;
+
+@Service
+public interface ContactService {
+	boolean createPartner(String campaignId, ContactDto dto);
+
+}

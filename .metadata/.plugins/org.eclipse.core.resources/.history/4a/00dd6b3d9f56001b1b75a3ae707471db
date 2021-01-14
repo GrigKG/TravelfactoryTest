@@ -1,0 +1,17 @@
+package company.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(code = HttpStatus.CONFLICT)
+public class ContactEmailException extends RuntimeException {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9044842073929519535L;
+	
+	public CampaignNotFoundException(String id) {
+		super("Campaign with id " + id + " not found");
+	}
+
+}

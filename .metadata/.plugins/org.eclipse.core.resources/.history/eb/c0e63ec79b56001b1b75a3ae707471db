@@ -1,0 +1,43 @@
+package TravelfactoryTest.service;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import TravelfactoryTest.dao.CampaignRepository;
+import TravelfactoryTest.dao.ContactRepository;
+import TravelfactoryTest.dto.ContactDTO;
+import TravelfactoryTest.model.Campaign;
+import TravelfactoryTest.model.Contact;
+import company.exception.CampaignNotFoundException;
+import company.exception.ContactExistException;
+
+@Service
+public class ContactServiceImpl implements ContactService {
+
+	@Autowired
+	ContactRepository contactRepository;
+	
+	@Autowired
+	CampaignRepository campaignRepository;
+
+	@Transactional
+	@Override
+	public boolean createPartner(String campaignId, ContactDTO contactDTO) {
+		if (contactRepository.existsById(contactDTO.getEmail())) {
+			throw new ContactExistException();
+		}
+		
+		Campaign campaign = campaignRepository.findById(campaignId).orElseThrow(() -> new CampaignNotFoundException());
+	
+		Contact contact = new Contact(contactDTO.getName(), contactDTO.getFirstName(), contactDTO.getEmail(), contactDTO.getPhone(), campaign);
+		
+		campaign.addContact(contact);
+		
+		campaignRepository.save(campaign);
+		contactRepository.save(contact);
+		return true;
+	}
+
+}

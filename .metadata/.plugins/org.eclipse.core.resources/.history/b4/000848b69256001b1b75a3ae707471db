@@ -1,0 +1,31 @@
+package TravelfactoryTest.service;
+
+import TravelfactoryTest.dto.CampaignDto;
+
+public class CampanignServiceImpl implements CampaignService {
+
+	@Override
+	public boolean createCampaign(String id, CampaignDto campaignDto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public CampaignDto getCampaign(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CampaignDto updateCampaign(String id, CampaignDto campaignDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean removeCampaign(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

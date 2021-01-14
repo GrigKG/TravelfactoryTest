@@ -1,0 +1,11 @@
+package TravelfactoryTest;
+
+public class Snippet {
+	public static void main(String[] args) {
+		company.exception
+		/Company/src/main/java/company/exception/CampaignNotFoundException.java
+		/Company/src/main/java/company/exception/FormatFieldException.java
+		/Company/src/main/java/company/exception/PartnerExistException.java
+	}
+}
+

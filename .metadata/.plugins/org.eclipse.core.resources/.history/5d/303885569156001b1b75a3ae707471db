@@ -1,0 +1,8 @@
+package TravelfactoryTest.service;
+
+import TravelfactoryTest.dto.ContactDto;
+
+public interface ContactService {
+	boolean createPartner(String campaignId, ContactDto dto);
+
+}

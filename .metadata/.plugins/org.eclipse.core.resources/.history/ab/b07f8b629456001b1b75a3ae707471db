@@ -1,0 +1,43 @@
+package TravelfactoryTest.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import TravelfactoryTest.dao.CampanignRepository;
+import TravelfactoryTest.dto.CampaignDto;
+import TravelfactoryTest.model.Campaign;
+
+public class CampanignServiceImpl implements CampaignService {
+
+	@Autowired
+	CampanignRepository campaignRepository;
+
+	
+	
+	@Override
+	public boolean createCampaign(String id, CampaignDto campaignDto) {
+		if (campaignRepository.existsById(id))
+			return false;
+		Campaign campaign = new Campaign(id, campaignDto.getCampaignName(), campaignDto.getMandatoryFields());
+		campaignRepository.save(campaign);
+		return true;
+	}
+
+	@Override
+	public CampaignDto getCampaign(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CampaignDto updateCampaign(String id, CampaignDto campaignDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean removeCampaign(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

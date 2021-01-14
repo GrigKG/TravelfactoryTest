@@ -1,0 +1,9 @@
+package TravelfactoryTest.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestControlle
+
+public class ContactController {
+
+}

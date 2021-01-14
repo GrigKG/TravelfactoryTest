@@ -1,0 +1,29 @@
+package TravelfactoryTest.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import TravelfactoryTest.dao.ContactRepository;
+import TravelfactoryTest.dto.CampaignDTO;
+import TravelfactoryTest.dto.ContactDTO;
+import TravelfactoryTest.model.Campaign;
+import TravelfactoryTest.model.Contact;
+
+@Service
+public class ContactServiceImpl implements ContactService {
+
+	@Autowired
+	ContactRepository contactRepository;
+	
+	@Autowired
+	CampaignService campaignService;
+
+	@Override
+	public boolean createPartner(String campaignId, ContactDTO contactDTO) {
+		CampaignDTO campaign = campaignService.getCampaign(campaignId);
+		Contact contact = new Contact(contactDTO.getName(), contactDTO.getFirstName(), contactDTO.getEmail(), contactDTO.getPhone(), campaign)
+		contactRepository.save(contact);
+		return true;
+	}
+
+}

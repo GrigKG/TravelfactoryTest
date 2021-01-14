@@ -1,0 +1,13 @@
+package TravelfactoryTest.service;
+
+import TravelfactoryTest.dto.ContactDTO;
+
+public class ContactServiceImpl implements ContactService {
+
+	@Override
+	public boolean createPartner(String campaignId, ContactDTO dto) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

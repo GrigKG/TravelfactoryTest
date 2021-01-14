@@ -1,0 +1,14 @@
+1610645875135	Rename type 'campaignService'
+1610646426007	Move compilation unit
+1610646436542	Rename type 'contactService'
+1610646660167	Rename type 'PartnerDto'
+1610648057154	Rename type 'CampaignDto'
+1610648071619	Rename type 'ContactDto'
+1610648252840	Delete element
+1610649782074	Rename type 'CampanignRepository'
+1610649850334	Rename type 'campaignRepository'
+1610650214263	Delete element
+1610650272082	Copy compilation unit
+1610651416832	Rename type 'ContactExistException'
+1610651828189	Copy compilation unit
+1610651936602	Copy compilation unit

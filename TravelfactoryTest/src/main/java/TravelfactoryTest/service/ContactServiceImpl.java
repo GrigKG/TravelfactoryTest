@@ -18,6 +18,10 @@ import company.exception.ContactPhoneException;
 @Service
 public class ContactServiceImpl implements ContactService {
 
+	private static final String mailMatches = "^[\\w-.]+@([\\w-]+.)+[\\w-]{2,4}$";
+	private static final String phoneMatches = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$";
+
+	
 	@Autowired
 	ContactRepository contactRepository;
 	
@@ -30,27 +34,27 @@ public class ContactServiceImpl implements ContactService {
 		
 		String mail = contactDTO.getEmail();
 		
-		if (contactRepository.existsById(mail)) {
-			throw new ContactConflictException(mail);
-		}
-		
-		if(!mail.matches("^ [\\w - .] + @ ( [\\w -] + .) + [\\w -] {2,4} $ ")) {
+		if(!mail.matches(mailMatches)) {
 			throw new ContactEmailException(mail);
 		}
 		
-		if(contactDTO.getPhone().matches("^ [+] * [(] {0,1} [0-9] {1,4} [)] {0,1} [- \\ s \\ ./ 0-9] * $")) {
+		if(contactDTO.getPhone().matches(phoneMatches)) {
 			throw new ContactPhoneException(contactDTO.getPhone());
 		}
 		
+		if (contactRepository.existsById(mail)) {
+			throw new ContactConflictException(mail);
+		}
+			
 		Campaign campaign = campaignRepository.findById(campaignId).orElseThrow(() -> new CampaignNotFoundException());
 	
-		Contact contact = new Contact(contactDTO.getName(), contactDTO.getFirstName(), contactDTO.getEmail(), contactDTO.getPhone(), campaign);
+		Contact contact = new Contact(mail, contactDTO.getFirstName(), contactDTO.getName(), contactDTO.getPhone(), campaign);
 		
 		if (!campaign.addContact(contact)) {
 			throw new RuntimeException();
 		};
 		contactRepository.save(contact);
-		campaignRepository.save(campaign);
+		//campaignRepository.save(campaign);
 		return true;
 	}
 

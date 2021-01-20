@@ -1,5 +1,10 @@
 package TravelfactoryTest.service;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +19,7 @@ import company.exception.CampaignNotFoundException;
 import company.exception.ContactConflictException;
 import company.exception.ContactEmailException;
 import company.exception.ContactPhoneException;
+import company.exception.FieldsConflictException;
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -45,16 +51,22 @@ public class ContactServiceImpl implements ContactService {
 		if (contactRepository.existsById(mail)) {
 			throw new ContactConflictException(mail);
 		}
-			
+		
 		Campaign campaign = campaignRepository.findById(campaignId).orElseThrow(() -> new CampaignNotFoundException());
-	
+		 List<String> mandatoryFields = campaign.getMandatoryFields();
+		 Field[] fields = contactDTO.getClass().getFields();
+		 List<String> fieldsName = Arrays.stream(fields).map(Field::getName).collect(Collectors.toList());
+		 if (!fieldsName.containsAll(mandatoryFields)) {
+			 throw new FieldsConflictException();
+		 }
+		 
+		
 		Contact contact = new Contact(mail, contactDTO.getFirstName(), contactDTO.getName(), contactDTO.getPhone(), campaign);
 		
 		if (!campaign.addContact(contact)) {
 			throw new RuntimeException();
 		};
 		contactRepository.save(contact);
-		//campaignRepository.save(campaign);
 		return true;
 	}
 

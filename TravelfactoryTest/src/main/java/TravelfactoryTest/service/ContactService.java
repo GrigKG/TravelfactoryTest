@@ -6,6 +6,6 @@ import TravelfactoryTest.dto.ContactDTO;
 
 @Service
 public interface ContactService {
-	boolean createPartner(String campaignId, ContactDTO dto);
+	boolean createPartner(String campaignId, ContactDTO dto) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException;
 
 }

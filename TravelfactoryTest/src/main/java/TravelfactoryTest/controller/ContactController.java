@@ -19,7 +19,7 @@ public class ContactController {
 	ContactService contactService;
 	
 	@PostMapping("/{campaignId}/registration")
-	public boolean createPartner(@PathVariable String campaignId,@RequestBody ContactDTO dto) {
+	public boolean createPartner(@PathVariable String campaignId,@RequestBody ContactDTO dto) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
 		return contactService.createPartner(campaignId, dto);
 	}
 }
